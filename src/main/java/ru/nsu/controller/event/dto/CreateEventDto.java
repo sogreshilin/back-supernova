@@ -7,6 +7,7 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Value;
 import ru.nsu.dto.IntervalDto;
 import ru.nsu.dto.LocationDto;
@@ -44,16 +45,16 @@ public class CreateEventDto {
 
     @JsonCreator
     public CreateEventDto(
-        Long authorId,
-        String title,
-        String description,
-        Set<EventType> types,
-        IntervalDto interval,
-        LocationDto location,
-        String email,
-        String siteUrl,
-        String phone,
-        Set<Long> imageIds
+        @JsonProperty("authorId") Long authorId,
+        @JsonProperty("title") String title,
+        @JsonProperty("description") String description,
+        @JsonProperty("types") Set<EventType> types,
+        @JsonProperty("interval") IntervalDto interval,
+        @JsonProperty("location") LocationDto location,
+        @JsonProperty("email") String email,
+        @JsonProperty("siteUrl") String siteUrl,
+        @JsonProperty("phone") String phone,
+        @JsonProperty("imageIds") Set<Long> imageIds
     ) {
         this.authorId = authorId;
         this.title = title;

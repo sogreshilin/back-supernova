@@ -5,6 +5,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Value;
 import ru.nsu.controller.event.converter.ImageConverter;
 import ru.nsu.dto.IntervalDto;
@@ -40,18 +41,18 @@ public class EventDto {
 
     @JsonCreator
     public EventDto(
-        PersonDto author,
-        String title,
-        String description,
-        Set<EventType> types,
-        IntervalDto interval,
-        LocationDto location,
-        String email,
-        String siteUrl,
-        String phone,
-        List<PersonDto> members,
-        long likesCount,
-        List<UploadedFile> images
+        @JsonProperty("author") PersonDto author,
+        @JsonProperty("title") String title,
+        @JsonProperty("description") String description,
+        @JsonProperty("types") Set<EventType> types,
+        @JsonProperty("interval") IntervalDto interval,
+        @JsonProperty("location") LocationDto location,
+        @JsonProperty("email") String email,
+        @JsonProperty("siteUrl") String siteUrl,
+        @JsonProperty("phone") String phone,
+        @JsonProperty("members") List<PersonDto> members,
+        @JsonProperty("likesCount") long likesCount,
+        @JsonProperty("images") List<UploadedFile> images
     ) {
         this.author = author;
         this.title = title;

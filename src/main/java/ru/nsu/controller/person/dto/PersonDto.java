@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Value;
 import ru.nsu.entity.enums.EventType;
 
@@ -23,12 +24,12 @@ public class PersonDto {
 
     @JsonCreator
     public PersonDto(
-        Long id,
-        String lastName,
-        String firstName,
-        Set<EventType> favouriteEventTypes,
-        List<EventDto> favouriteEvents,
-        List<EventDto> createdEvents
+        @JsonProperty("id") Long id,
+        @JsonProperty("lastName") String lastName,
+        @JsonProperty("firstName") String firstName,
+        @JsonProperty("favouriteEventTypes") Set<EventType> favouriteEventTypes,
+        @JsonProperty("favouriteEvents") List<EventDto> favouriteEvents,
+        @JsonProperty("createdEvents") List<EventDto> createdEvents
     ) {
         this.id = id;
         this.lastName = lastName;
