@@ -22,6 +22,12 @@ public class EventLikesController {
         return new ResponseEntity(newLikeAdded ? HttpStatus.OK : HttpStatus.ALREADY_REPORTED);
     }
 
+    @PostMapping("/dislikes/{personId}")
+    public ResponseEntity dislikeEventBy(@PathVariable long eventId, @PathVariable long personId) {
+        boolean newDislikeAdded = eventLikesService.dislikeEventBy(eventId, personId);
+        return new ResponseEntity(newDislikeAdded ? HttpStatus.OK : HttpStatus.ALREADY_REPORTED);
+    }
+
     @GetMapping("/likes")
     public long getLikesCount(@PathVariable long eventId) {
         return eventLikesService.getLikesCount(eventId);

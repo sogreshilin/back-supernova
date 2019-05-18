@@ -65,3 +65,11 @@ create table person_favourite_event
   person_id bigint references person,
   primary key (event_id, person_id)
 );
+
+--changeset miliaev:supernova-10-person-disliked-event-table
+create table person_disliked_event
+(
+  event_id  bigint references event,
+  person_id bigint references person,
+  primary key (event_id, person_id)
+);
