@@ -1,11 +1,14 @@
 package ru.nsu.service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ru.nsu.controller.event.CreateEventDto;
+import ru.nsu.controller.event.converter.EventConverter;
+import ru.nsu.controller.event.dto.CreateEventDto;
+import ru.nsu.controller.event.dto.EventDto;
 import ru.nsu.converter.IntervalConverter;
 import ru.nsu.converter.LocationConverter;
 import ru.nsu.entity.Event;
@@ -20,34 +23,36 @@ import ru.nsu.repository.PersonRepository;
 @Transactional
 @RequiredArgsConstructor
 public class EventService {
-    private final IntervalConverter intervalConverter;
-    private final LocationConverter locationConverter;
     private final EventRepository eventRepository;
     private final PersonRepository personRepository;
 
-    public Event create(CreateEventDto eventDto) {
+    public EventDto create(CreateEventDto eventDto) {
         long authorId = eventDto.getAuthorId();
         Person author = personRepository.findById(authorId).orElseThrow(() -> new PersonNotFoundException(authorId));
-        return eventRepository.save(new Event()
-            .setTitle(eventDto.getTitle())
-            .setDescription(eventDto.getDescription())
-            .setInterval(intervalConverter.fromApi(eventDto.getInterval()))
-            .setSiteUrl(eventDto.getSiteUrl())
-            .setEmail(eventDto.getEmail())
-            .setPhone(eventDto.getPhone())
-            .setAuthor(author)
-            .setLocation(locationConverter.fromApi(eventDto.getLocation()))
-            .setTypes(eventDto.getTypes())
+        return EventConverter.toApi(
+            eventRepository.save(new Event()
+                .setTitle(eventDto.getTitle())
+                .setDescription(eventDto.getDescription())
+                .setInterval(IntervalConverter.fromApi(eventDto.getInterval()))
+                .setSiteUrl(eventDto.getSiteUrl())
+                .setEmail(eventDto.getEmail())
+                .setPhone(eventDto.getPhone())
+                .setAuthor(author)
+                .setLocation(LocationConverter.fromApi(eventDto.getLocation()))
+                .setTypes(eventDto.getTypes())
+            )
         );
     }
 
-    public Event findById(long eventId) {
-        return eventRepository.findById(eventId).orElseThrow(() -> new EventNotFoundException(eventId));
+    public EventDto findById(long eventId) {
+        return EventConverter.toApi(
+            eventRepository.findById(eventId).orElseThrow(() -> new EventNotFoundException(eventId))
+        );
     }
 
-    public List<Event> findByAuthorId(long authorId) {
+    public List<EventDto> findByAuthorId(long authorId) {
         personRepository.findById(authorId).orElseThrow(() -> new PersonNotFoundException(authorId));
-        return eventRepository.findAllByAuthorId(authorId);
+        return eventRepository.findAllByAuthorId(authorId).stream().map(EventConverter::toApi).collect(Collectors.toList());
     }
 
     public void addImage(long eventId, UploadedFile image) {

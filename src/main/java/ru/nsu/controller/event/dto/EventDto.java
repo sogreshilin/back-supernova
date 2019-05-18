@@ -1,10 +1,7 @@
-package ru.nsu.controller.event;
+package ru.nsu.controller.event.dto;
 
+import java.util.List;
 import java.util.Set;
-
-import javax.validation.Valid;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import lombok.Value;
@@ -13,25 +10,17 @@ import ru.nsu.dto.LocationDto;
 import ru.nsu.entity.enums.EventType;
 
 @Value
-public class CreateEventDto {
-    @NotNull
-    private final Long authorId;
+public class EventDto {
+    private final PersonDto author;
 
-    @NotNull
     private final String title;
 
-    @NotNull
     private final String description;
 
-    @NotEmpty
     private final Set<EventType> types;
 
-    @Valid
-    @NotNull
     private final IntervalDto interval;
 
-    @Valid
-    @NotNull
     private final LocationDto location;
 
     private final String email;
@@ -40,9 +29,11 @@ public class CreateEventDto {
 
     private final String phone;
 
+    private final List<PersonDto> members;
+
     @JsonCreator
-    public CreateEventDto(
-        Long authorId,
+    public EventDto(
+        PersonDto author,
         String title,
         String description,
         Set<EventType> types,
@@ -50,9 +41,10 @@ public class CreateEventDto {
         LocationDto location,
         String email,
         String siteUrl,
-        String phone
+        String phone,
+        List<PersonDto> members
     ) {
-        this.authorId = authorId;
+        this.author = author;
         this.title = title;
         this.description = description;
         this.types = types;
@@ -61,5 +53,6 @@ public class CreateEventDto {
         this.email = email;
         this.siteUrl = siteUrl;
         this.phone = phone;
+        this.members = members;
     }
 }

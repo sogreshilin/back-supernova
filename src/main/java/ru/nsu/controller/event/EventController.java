@@ -13,9 +13,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
-import ru.nsu.entity.Event;
 import ru.nsu.entity.UploadedFile;
 import ru.nsu.exception.http.FileProcessingException;
+import ru.nsu.controller.event.dto.CreateEventDto;
+import ru.nsu.controller.event.dto.EventDto;
 import ru.nsu.service.EventService;
 import ru.nsu.service.FileService;
 
@@ -27,17 +28,17 @@ public class EventController {
     private final FileService fileService;
 
     @PostMapping
-    public Event create(@RequestBody CreateEventDto event) {
+    public EventDto create(@RequestBody CreateEventDto event) {
         return eventService.create(event);
     }
 
     @GetMapping("/{eventId}")
-    public Event findById(@PathVariable long eventId) {
+    public EventDto findById(@PathVariable long eventId) {
         return eventService.findById(eventId);
     }
 
     @GetMapping("/by/{authorId}")
-    public List<Event> findByAuthorId(@PathVariable long authorId) {
+    public List<EventDto> findByAuthorId(@PathVariable long authorId) {
         return eventService.findByAuthorId(authorId);
     }
 
