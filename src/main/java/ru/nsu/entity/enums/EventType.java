@@ -1,0 +1,29 @@
+package ru.nsu.entity.enums;
+
+public enum EventType {
+    ARTS,
+    BELIEFS,
+    BOOK_CLUBS,
+    CAREER_BUSINESS,
+    DANCE,
+    FAMILY,
+    FASHION_AND_BEAUTY,
+    FILM,
+    FOOD_AND_DRINK,
+    HEALTH_AND_WELLNESS,
+    HOBBIES_AND_CRAFTS,
+    LGBTQ,
+    LANGUAGE_AND_CULTURE,
+    LEARNING,
+    MOVEMENTS,
+    MUSIC,
+    OUTDOORS_AND_ADVENTURE,
+    PETS,
+    PROGRAMMING,
+    PHOTOGRAPHY,
+    SCI_FI_AND_GAMES,
+    SOCIAL,
+    SPORTS_AND_FITNESS,
+    TECH,
+    WRITING;
+}
