@@ -1,4 +1,4 @@
-package ru.nsu.controller.person;
+package ru.nsu.controller.person.dto;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import lombok.Value;

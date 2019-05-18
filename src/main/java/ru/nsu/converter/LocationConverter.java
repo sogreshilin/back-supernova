@@ -1,12 +1,10 @@
 package ru.nsu.converter;
 
-import org.springframework.stereotype.Component;
 import ru.nsu.dto.LocationDto;
 import ru.nsu.entity.Location;
 
-@Component
 public class LocationConverter {
-    public Location fromApi(LocationDto source) {
+    public static Location fromApi(LocationDto source) {
         return new Location()
             .setId(source.getId())
             .setLatitude(source.getLatitude())
@@ -15,7 +13,7 @@ public class LocationConverter {
             .setAddress(source.getAddress());
     }
 
-    public LocationDto toApi(Location source) {
+    public static LocationDto toApi(Location source) {
         return new LocationDto(
             source.getId(),
             source.getLatitude(),
