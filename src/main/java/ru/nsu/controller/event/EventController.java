@@ -1,5 +1,7 @@
 package ru.nsu.controller.event;
 
+import java.util.List;
+
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,5 +26,10 @@ public class EventController {
     @GetMapping("/{eventId}")
     public Event findById(@PathVariable long eventId) {
         return eventService.findById(eventId);
+    }
+
+    @GetMapping("/by/{authorId}")
+    public List<Event> findByAuthorId(@PathVariable long authorId) {
+        return eventService.findByAuthorId(authorId);
     }
 }

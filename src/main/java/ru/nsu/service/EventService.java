@@ -1,5 +1,7 @@
 package ru.nsu.service;
 
+import java.util.List;
+
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -40,5 +42,10 @@ public class EventService {
 
     public Event findById(long eventId) {
         return eventRepository.findById(eventId).orElseThrow(() -> new EventNotFoundException(eventId));
+    }
+
+    public List<Event> findByAuthorId(long authorId) {
+        personRepository.findById(authorId).orElseThrow(() -> new PersonNotFoundException(authorId));
+        return eventRepository.findAllByAuthorId(authorId);
     }
 }
