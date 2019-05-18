@@ -17,18 +17,21 @@ import ru.nsu.entity.UploadedFile;
 import ru.nsu.exception.http.EventNotFoundException;
 import ru.nsu.exception.http.PersonNotFoundException;
 import ru.nsu.repository.EventRepository;
+import ru.nsu.repository.FileRepository;
 import ru.nsu.repository.PersonRepository;
 
 @Service
 @Transactional
 @RequiredArgsConstructor
 public class EventService {
+    private final FileRepository fileRepository;
     private final EventRepository eventRepository;
     private final PersonRepository personRepository;
 
     public EventDto create(CreateEventDto eventDto) {
         long authorId = eventDto.getAuthorId();
         Person author = personRepository.findById(authorId).orElseThrow(() -> new PersonNotFoundException(authorId));
+        List<UploadedFile> images = fileRepository.findAllById(eventDto.getImageIds());
         return EventConverter.toApi(
             eventRepository.save(new Event()
                 .setTitle(eventDto.getTitle())
@@ -40,6 +43,7 @@ public class EventService {
                 .setAuthor(author)
                 .setLocation(LocationConverter.fromApi(eventDto.getLocation()))
                 .setTypes(eventDto.getTypes())
+                .setImages(images)
             )
         );
     }
@@ -59,5 +63,10 @@ public class EventService {
         Event event = eventRepository.findById(eventId).orElseThrow(() -> new EventNotFoundException(eventId));
         event.getImages().add(image);
         eventRepository.save(event);
+    }
+
+    public List<EventDto> findFavouriteEventsByPersonId(long userId) {
+        Person person = personRepository.findById(userId).orElseThrow(() -> new PersonNotFoundException(userId));
+        return person.getFavouriteEvents().stream().map(EventConverter::toApi).collect(Collectors.toList());
     }
 }

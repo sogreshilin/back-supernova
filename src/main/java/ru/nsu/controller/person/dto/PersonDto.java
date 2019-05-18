@@ -9,22 +9,32 @@ import ru.nsu.entity.enums.EventType;
 
 @Value
 public class PersonDto {
+    private final Long id;
+
     private final String lastName;
 
     private final String firstName;
 
-    private final Set<EventType> favourites;
+    private final Set<EventType> favouriteEventTypes;
 
-    private List<EventDto> likedEvents;
+    private final List<EventDto> favouriteEvents;
+
+    private final List<EventDto> createdEvents;
 
     @JsonCreator
-    public PersonDto(String lastName,
-                     String firstName,
-                     Set<EventType> favourites,
-                     List<EventDto> likedEvents) {
+    public PersonDto(
+        Long id,
+        String lastName,
+        String firstName,
+        Set<EventType> favouriteEventTypes,
+        List<EventDto> favouriteEvents,
+        List<EventDto> createdEvents
+    ) {
+        this.id = id;
         this.lastName = lastName;
         this.firstName = firstName;
-        this.favourites = favourites;
-        this.likedEvents = likedEvents;
+        this.favouriteEventTypes = favouriteEventTypes;
+        this.favouriteEvents = favouriteEvents;
+        this.createdEvents = createdEvents;
     }
 }

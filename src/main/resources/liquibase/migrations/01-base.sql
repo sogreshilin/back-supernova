@@ -51,14 +51,15 @@ create table event_person
 );
 
 --changeset miliaev:supernova-04-person-favourite-types-table
-create table person_favourite_types
+create table person_favourite_event_type
 (
   person_id bigint not null references person,
-  type      text   not null
+  type      text   not null,
+  primary key (person_id, type)
 );
 
 --changeset miliaev:supernova-05-event-person-likes-table
-create table person_event_likes
+create table person_favourite_event
 (
   event_id  bigint references event,
   person_id bigint references person,

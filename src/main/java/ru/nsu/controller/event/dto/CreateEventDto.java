@@ -40,6 +40,8 @@ public class CreateEventDto {
 
     private final String phone;
 
+    private final Set<Long> imageIds;
+
     @JsonCreator
     public CreateEventDto(
         Long authorId,
@@ -50,7 +52,8 @@ public class CreateEventDto {
         LocationDto location,
         String email,
         String siteUrl,
-        String phone
+        String phone,
+        Set<Long> imageIds
     ) {
         this.authorId = authorId;
         this.title = title;
@@ -61,5 +64,6 @@ public class CreateEventDto {
         this.email = email;
         this.siteUrl = siteUrl;
         this.phone = phone;
+        this.imageIds = imageIds;
     }
 }

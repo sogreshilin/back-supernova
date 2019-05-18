@@ -12,11 +12,12 @@ public class PersonConverter {
 
     public static PersonDto toApi(Person person) {
         return new PersonDto(
+            person.getId(),
             person.getLastName(),
             person.getFirstName(),
-            person.getFavourites(),
-            toApi(person.getLikedEvents())
-        );
+            person.getFavouriteEventTypes(),
+            toApi(person.getFavouriteEvents()),
+            toApi(person.getCreatedEvents()));
     }
 
     public static List<EventDto> toApi(List<Event> events) {

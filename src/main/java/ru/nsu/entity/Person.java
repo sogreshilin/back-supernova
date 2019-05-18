@@ -18,6 +18,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
@@ -50,15 +51,18 @@ public class Person {
 
     @ElementCollection
     @Column(name = "type")
-    @CollectionTable(name = "person_favourite_types", joinColumns = @JoinColumn(name = "person_id"))
+    @CollectionTable(name = "person_favourite_event_type", joinColumns = @JoinColumn(name = "person_id"))
     @Enumerated(EnumType.STRING)
-    private Set<EventType> favourites = new HashSet<>();
+    private Set<EventType> favouriteEventTypes = new HashSet<>();
 
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
-        name = "person_event_likes",
+        name = "person_favourite_event",
         joinColumns = {@JoinColumn(name = "person_id")},
         inverseJoinColumns = {@JoinColumn(name = "event_id")}
     )
-    private List<Event> likedEvents = new ArrayList<>();
+    private List<Event> favouriteEvents = new ArrayList<>();
+
+    @OneToMany(mappedBy = "author")
+    private List<Event> createdEvents = new ArrayList<>();
 }
