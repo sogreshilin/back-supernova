@@ -28,7 +28,7 @@ public class PersonService {
 
     public Person add(long personId, EventType type) {
         Person person = personRepository.findById(personId).orElseThrow(() -> new PersonNotFoundException(personId));
-
+        person.getFavourites().add(type);
         return personRepository.save(person);
     }
 }
