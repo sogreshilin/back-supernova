@@ -48,7 +48,9 @@ public class CreateEventDto {
         Set<EventType> types,
         IntervalDto interval,
         LocationDto location,
-        String email, String siteUrl, String phone
+        String email,
+        String siteUrl,
+        String phone
     ) {
         this.authorId = authorId;
         this.title = title;

@@ -1,7 +1,5 @@
 package ru.nsu.controller.event;
 
-import javax.validation.Valid;
-
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,7 +17,7 @@ public class EventController {
     private final EventService eventService;
 
     @PostMapping
-    public Event create(@Valid @RequestBody CreateEventDto event) {
+    public Event create(@RequestBody CreateEventDto event) {
         return eventService.create(event);
     }
 
