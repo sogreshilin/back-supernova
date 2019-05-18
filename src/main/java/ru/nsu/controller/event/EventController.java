@@ -37,6 +37,11 @@ public class EventController {
         return eventService.findById(eventId);
     }
 
+    @GetMapping("/favourite/{personId}")
+    public List<EventDto> findFavouriteEventsByPersonId(@PathVariable long personId) {
+        return eventService.findFavouriteEventsByPersonId(personId);
+    }
+
     @GetMapping("/by/{authorId}")
     public List<EventDto> findByAuthorId(@PathVariable long authorId) {
         return eventService.findByAuthorId(authorId);

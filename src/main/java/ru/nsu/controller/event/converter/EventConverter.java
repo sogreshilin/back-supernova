@@ -18,7 +18,9 @@ public class EventConverter {
             event.getEmail(),
             event.getSiteUrl(),
             event.getPhone(),
-            PersonConverter.toApi(event.getMembers())
+            PersonConverter.toApi(event.getMembers()),
+            event.getLikedPersons().size(),
+            event.getImages()
         );
     }
 }

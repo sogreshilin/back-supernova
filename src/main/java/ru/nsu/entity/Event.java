@@ -97,7 +97,7 @@ public class Event {
 
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
-        name = "person_event_likes",
+        name = "person_favourite_event",
         joinColumns = {@JoinColumn(name = "event_id")},
         inverseJoinColumns = {@JoinColumn(name = "person_id")}
     )
