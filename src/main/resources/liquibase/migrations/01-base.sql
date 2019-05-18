@@ -50,13 +50,6 @@ create table event_person
   primary key (event_id, person_id)
 );
 
---changeset sogreshilin:supernova-01-event-image-table
-create table event_image
-(
-  event_id  bigint not null references event,
-  image_url text   not null
-);
-
 --changeset miliaev:supernova-04-person-favourite-types-table
 create table person_favourite_types
 (
