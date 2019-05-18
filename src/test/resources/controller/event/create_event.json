@@ -1,0 +1,24 @@
+{
+   "title": "Docker Meetup #9",
+   "description": "В этот раз мы поговорим про новый механизм сборки образов через BuildKit и о том как сделать свой маленький PaaS на k8s.",
+   "creator": {
+      "name": "Docker-Nsk",
+      "type": "ORGANIZATION"
+   },
+   "interval": {
+      "from": "2019-05-25T13:00:00Z",
+      "to": "2019-05-25T16:00:00Z"
+   },
+   "location": {
+      "latitude": 55.02928161621094,
+      "longitude": 82.92628479003906,
+      "city": "Novosibirsk",
+      "address": "Депутатская, 46, подъезд 3, этаж 5"
+   },
+   "siteUrl": "https://www.meetup.com/Docker-Novosibirsk/events/261449905/",
+   "phone": "9139999999",
+   "types": [
+      "PROGRAMMING",
+      "LEARNING"
+   ]
+}
