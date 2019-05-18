@@ -1,6 +1,7 @@
 package ru.nsu.entity;
 
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.CascadeType;
@@ -44,14 +45,14 @@ public class Event {
     @Column
     private String description;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    private Creator creator;
+    @OneToOne
+    private Person author;
 
     @ElementCollection
     @Column(name = "type")
     @CollectionTable(name = "event_type", joinColumns = @JoinColumn(name = "event_id"))
     @Enumerated(EnumType.STRING)
-    private List<EventType> types;
+    private Set<EventType> types;
 
     @OneToMany(cascade = CascadeType.ALL)
     @JoinTable(
