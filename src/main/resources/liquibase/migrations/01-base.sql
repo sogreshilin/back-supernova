@@ -1,6 +1,6 @@
 --liquibase formatted sql
 
---changeset sogreshilin:supernova-01-creator-table
+--changeset sogreshilin:supernova-01-author-table
 create table creator
 (
   id   bigserial primary key,
@@ -32,7 +32,7 @@ create table event
   id            bigserial primary key,
   title         text                     not null,
   description   text                     not null,
-  creator_id    bigint                   not null references creator,
+  author_id     bigint                   not null references person,
   rating        double precision,
   location_id   bigint references location,
   from_datetime timestamp with time zone not null,
