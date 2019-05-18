@@ -1,13 +1,5 @@
 --liquibase formatted sql
 
---changeset sogreshilin:supernova-01-author-table
-create table creator
-(
-  id   bigserial primary key,
-  name text not null,
-  type text not null
-);
-
 --changeset sogreshilin:supernova-01-person-table
 create table person
 (
@@ -55,11 +47,8 @@ create table event_person
 (
   event_id  bigint references event,
   person_id bigint references person,
-  weight    double precision not null,
   primary key (event_id, person_id)
 );
-
-comment on column event_person.weight is 'Насколько данному пользователю подходит данное событие. Используется в рекомендательной системе';
 
 --changeset sogreshilin:supernova-01-event-image-table
 create table event_image
@@ -68,9 +57,17 @@ create table event_image
   image_url text   not null
 );
 
---changeset miliaev:supernova-04-person-favourites-table
-create table person_favourites
+--changeset miliaev:supernova-04-person-favourite-types-table
+create table person_favourite_types
 (
   person_id bigint not null references person,
   type      text   not null
+);
+
+--changeset miliaev:supernova-05-event-person-likes-table
+create table person_event_likes
+(
+  event_id  bigint references event,
+  person_id bigint references person,
+  primary key (event_id, person_id)
 );
