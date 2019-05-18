@@ -65,4 +65,12 @@ public class Person {
 
     @OneToMany(mappedBy = "author")
     private List<Event> createdEvents = new ArrayList<>();
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+        name = "person_disliked_event",
+        joinColumns = {@JoinColumn(name = "person_id")},
+        inverseJoinColumns = {@JoinColumn(name = "event_id")}
+    )
+    private List<Event> dislikedEvents = new ArrayList<>();
 }

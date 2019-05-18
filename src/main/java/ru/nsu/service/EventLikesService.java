@@ -23,12 +23,38 @@ public class EventLikesService {
         Event event = eventRepository.findById(eventId).orElseThrow(() -> new EventNotFoundException(eventId));
         Person person = personRepository.findById(personId).orElseThrow(() -> new PersonNotFoundException(personId));
         List<Event> favouriteEvents = person.getFavouriteEvents();
-        if (favouriteEvents.stream().map(Event::getId).anyMatch(id -> id == eventId)) {
+        List<Event> dislikedEvents = person.getDislikedEvents();
+        if (checkAlreadyReported(eventId, favouriteEvents)) {
             return false;
         }
+        tryToRemoveDuplication(eventId, event, dislikedEvents);
         favouriteEvents.add(event);
         personRepository.save(person);
         return true;
+    }
+
+    private boolean checkAlreadyReported(long eventId, List<Event> events) {
+        return events.stream().map(Event::getId).anyMatch(id -> id == eventId);
+    }
+
+    public boolean dislikeEventBy(long eventId, long personId) {
+        Event event = eventRepository.findById(eventId).orElseThrow(() -> new EventNotFoundException(eventId));
+        Person person = personRepository.findById(personId).orElseThrow(() -> new PersonNotFoundException(personId));
+        List<Event> favouriteEvents = person.getFavouriteEvents();
+        List<Event> dislikedEvents = person.getDislikedEvents();
+        if (checkAlreadyReported(eventId, dislikedEvents)) {
+            return false;
+        }
+        tryToRemoveDuplication(eventId, event, favouriteEvents);
+        dislikedEvents.add(event);
+        personRepository.save(person);
+        return true;
+    }
+
+    private void tryToRemoveDuplication(long eventId, Event event, List<Event> events) {
+        if (events.stream().map(Event::getId).anyMatch(id -> id == eventId)) {
+            events.remove(event);
+        }
     }
 
     public long getLikesCount(long eventId) {
