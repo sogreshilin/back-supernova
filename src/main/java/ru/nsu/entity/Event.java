@@ -66,6 +66,14 @@ public class Event {
     @Enumerated(value = EnumType.STRING)
     private List<Person> members = new ArrayList<>();
 
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+        name = "event_image",
+        joinColumns = @JoinColumn(name = "event_id"),
+        inverseJoinColumns = @JoinColumn(name = "image_id")
+    )
+    private List<UploadedFile> images = new ArrayList<>();
+
     @Embedded
     @AttributeOverride(name = "from", column = @Column(name = "from_datetime"))
     @AttributeOverride(name = "to", column = @Column(name = "to_datetime"))

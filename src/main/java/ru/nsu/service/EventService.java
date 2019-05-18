@@ -10,6 +10,7 @@ import ru.nsu.converter.IntervalConverter;
 import ru.nsu.converter.LocationConverter;
 import ru.nsu.entity.Event;
 import ru.nsu.entity.Person;
+import ru.nsu.entity.UploadedFile;
 import ru.nsu.exception.http.EventNotFoundException;
 import ru.nsu.exception.http.PersonNotFoundException;
 import ru.nsu.repository.EventRepository;
@@ -47,5 +48,11 @@ public class EventService {
     public List<Event> findByAuthorId(long authorId) {
         personRepository.findById(authorId).orElseThrow(() -> new PersonNotFoundException(authorId));
         return eventRepository.findAllByAuthorId(authorId);
+    }
+
+    public void addImage(long eventId, UploadedFile image) {
+        Event event = eventRepository.findById(eventId).orElseThrow(() -> new EventNotFoundException(eventId));
+        event.getImages().add(image);
+        eventRepository.save(event);
     }
 }
