@@ -1,6 +1,6 @@
 package ru.nsu.entity;
 
-import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;
@@ -46,5 +46,5 @@ public class Person {
     @Column(name = "type")
     @CollectionTable(name = "person_favourites", joinColumns = @JoinColumn(name = "person_id"))
     @Enumerated(EnumType.STRING)
-    private List<EventType> favourites;
+    private Set<EventType> favourites;
 }
