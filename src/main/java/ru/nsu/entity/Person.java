@@ -1,10 +1,17 @@
 package ru.nsu.entity;
 
+import java.util.List;
+
+import javax.persistence.CollectionTable;
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
@@ -12,6 +19,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.Accessors;
+import ru.nsu.entity.enums.EventType;
 
 @NoArgsConstructor
 @Getter
@@ -34,6 +42,9 @@ public class Person {
     @Column
     private String firstName;
 
-    @Column
-    private String city;
+    @ElementCollection
+    @Column(name = "type")
+    @CollectionTable(name = "person_favourites", joinColumns = @JoinColumn(name = "person_id"))
+    @Enumerated(EnumType.STRING)
+    private List<EventType> favourites;
 }
