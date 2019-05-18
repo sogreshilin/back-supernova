@@ -3,6 +3,7 @@ package ru.nsu.controller.person.dto;
 import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Value;
 import ru.nsu.entity.enums.EventType;
 
@@ -14,8 +15,8 @@ public class EventDto {
 
     @JsonCreator
     public EventDto(
-        String title,
-        Set<EventType> types
+        @JsonProperty("title") String title,
+        @JsonProperty("types") Set<EventType> types
     ) {
         this.title = title;
         this.types = types;
