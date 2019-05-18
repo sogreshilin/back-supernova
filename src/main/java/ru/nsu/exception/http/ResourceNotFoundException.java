@@ -37,7 +37,9 @@ public abstract class ResourceNotFoundException extends SupernovaException {
 
     @SuppressWarnings("checkstyle:NoWhitespaceBefore")
     public enum ResourceType {
-        EVENT;
+        EVENT,
+        PERSON
+        ;
 
         @Override
         @JsonValue

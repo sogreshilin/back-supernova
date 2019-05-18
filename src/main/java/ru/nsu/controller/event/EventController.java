@@ -1,4 +1,4 @@
-package ru.nsu.controller;
+package ru.nsu.controller.event;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
