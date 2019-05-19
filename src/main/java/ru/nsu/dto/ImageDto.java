@@ -1,4 +1,4 @@
-package ru.nsu.controller.event.dto;
+package ru.nsu.dto;
 
 import java.time.Instant;
 
