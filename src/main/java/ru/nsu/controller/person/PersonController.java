@@ -25,7 +25,7 @@ public class PersonController {
     }
 
     @PatchMapping("/{personId}/favourites")
-    public Person addFavourite(@PathVariable long personId, @RequestBody FavouriteDto favouriteDto) {
+    public PersonDto addFavourite(@PathVariable long personId, @RequestBody FavouriteDto favouriteDto) {
         return personService.add(personId, favouriteDto.getType());
     }
 

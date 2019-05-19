@@ -32,9 +32,9 @@ public class PersonService {
         return PersonConverter.toApi(personRepository.findByVkId(vkId).orElseThrow(() -> new PersonNotFoundException(vkId)));
     }
 
-    public Person add(long personId, EventType type) {
+    public PersonDto add(long personId, EventType type) {
         Person person = personRepository.findById(personId).orElseThrow(() -> new PersonNotFoundException(personId));
         person.getFavouriteEventTypes().add(type);
-        return personRepository.save(person);
+        return PersonConverter.toApi(personRepository.save(person));
     }
 }

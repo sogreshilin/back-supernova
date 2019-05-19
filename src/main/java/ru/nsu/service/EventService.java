@@ -55,6 +55,10 @@ public class EventService {
         );
     }
 
+    public List<EventDto> findAllByIds(List<Long> eventIds) {
+        return eventRepository.findAllById(eventIds).stream().map(EventConverter::toApi).collect(Collectors.toList());
+    }
+
     public List<EventDto> findByAuthorId(long authorId) {
         personRepository.findById(authorId).orElseThrow(() -> new PersonNotFoundException(authorId));
         return eventRepository.findAllByAuthorId(authorId).stream().map(EventConverter::toApi).collect(Collectors.toList());
