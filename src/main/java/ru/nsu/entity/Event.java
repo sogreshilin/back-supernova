@@ -43,6 +43,9 @@ public class Event {
     private Long id;
 
     @Column
+    private String externalId;
+
+    @Column
     private String title;
 
     @Column

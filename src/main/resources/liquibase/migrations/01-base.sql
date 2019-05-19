@@ -4,7 +4,7 @@
 create table person
 (
   id         bigserial primary key,
-  vk_id      text not null,
+  vk_id      text unique,
   last_name  text not null,
   first_name text not null
 );
@@ -14,21 +14,22 @@ create table location
   id        bigserial primary key,
   latitude  double precision,
   longitude double precision,
-  city      text not null,
-  address   text not null
+  city      text,
+  address   text
 );
 
 --changeset sogreshilin:supernova-01-event-table
 create table event
 (
   id            bigserial primary key,
+  external_id   text,
   title         text                     not null,
   description   text                     not null,
   author_id     bigint                   not null references person,
   rating        double precision,
   location_id   bigint references location,
   from_datetime timestamp with time zone not null,
-  to_datetime   timestamp with time zone not null,
+  to_datetime   timestamp with time zone,
   site_url      text,
   phone         text,
   email         text

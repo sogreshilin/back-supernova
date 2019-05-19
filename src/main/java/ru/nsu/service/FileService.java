@@ -3,6 +3,9 @@ package ru.nsu.service;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.UUID;
 
 import javax.servlet.ServletOutputStream;
 
@@ -12,6 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.nsu.entity.UploadedFile;
 import ru.nsu.exception.http.FileNotFoundException;
+import ru.nsu.exception.http.FileProcessingException;
 import ru.nsu.repository.FileRepository;
 
 @Service
@@ -39,5 +43,20 @@ public class FileService {
             throw new FileNotFoundException(uploadedFile.getId());
         }
         FileUtils.copyFile(inputFile, outputStream);
+    }
+
+    public UploadedFile uploadFile(URL url) {
+        try (InputStream is = url.openStream()) {
+            return save(String.valueOf(UUID.randomUUID().getLeastSignificantBits()), getContentType(url), is);
+        } catch (IOException e) {
+            throw new FileProcessingException("Error uploading file from URL=[" + url + "]");
+        }
+    }
+
+    private String getContentType(URL url) throws IOException {
+        HttpURLConnection connection = (HttpURLConnection)  url.openConnection();
+        connection.setRequestMethod("HEAD");
+        connection.connect();
+        return connection.getContentType();
     }
 }
