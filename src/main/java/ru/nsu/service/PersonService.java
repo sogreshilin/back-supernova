@@ -24,8 +24,12 @@ public class PersonService {
         return personRepository.save(person);
     }
 
-    public PersonDto get(long personId) {
+    public PersonDto getById(long personId) {
         return PersonConverter.toApi(personRepository.findById(personId).orElseThrow(() -> new PersonNotFoundException(personId)));
+    }
+
+    public PersonDto getByVkId(String vkId) {
+        return PersonConverter.toApi(personRepository.findByVkId(vkId).orElseThrow(() -> new PersonNotFoundException(vkId)));
     }
 
     public Person add(long personId, EventType type) {
