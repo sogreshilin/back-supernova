@@ -30,7 +30,12 @@ public class PersonController {
     }
 
     @GetMapping("{personId}")
-    public PersonDto get(@PathVariable long personId) {
-        return personService.get(personId);
+    public PersonDto getById(@PathVariable long personId) {
+        return personService.getById(personId);
+    }
+
+    @GetMapping("/vk/{vkId}")
+    public PersonDto getByVkId(@PathVariable String vkId) {
+        return personService.getByVkId(vkId);
     }
 }
