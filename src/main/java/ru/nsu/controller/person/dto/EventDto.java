@@ -11,6 +11,8 @@ import ru.nsu.entity.enums.EventType;
 
 @Value
 public class EventDto {
+    private final Long id;
+
     private final String title;
 
     private final Set<EventType> types;
@@ -19,10 +21,12 @@ public class EventDto {
 
     @JsonCreator
     public EventDto(
+        @JsonProperty("id") Long id,
         @JsonProperty("title") String title,
         @JsonProperty("types") Set<EventType> types,
         @JsonProperty("images") List<ImageDto> images
     ) {
+        this.id = id;
         this.title = title;
         this.types = types;
         this.images = images;

@@ -10,6 +10,7 @@ public class EventConverter {
 
     public static EventDto toApi(Event event) {
         return new EventDto(
+            event.getId(),
             event.getTitle(),
             event.getTypes(),
             event.getImages().stream().map(ImageConverter::toApi).collect(Collectors.toList())
