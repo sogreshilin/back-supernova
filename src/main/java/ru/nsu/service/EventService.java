@@ -34,6 +34,7 @@ public class EventService {
         List<UploadedFile> images = fileRepository.findAllById(eventDto.getImageIds());
         return EventConverter.toApi(
             eventRepository.save(new Event()
+                .setExternalId(eventDto.getExternalId())
                 .setTitle(eventDto.getTitle())
                 .setDescription(eventDto.getDescription())
                 .setInterval(IntervalConverter.fromApi(eventDto.getInterval()))
