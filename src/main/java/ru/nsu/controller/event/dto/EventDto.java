@@ -16,6 +16,8 @@ import ru.nsu.entity.enums.EventType;
 
 @Value
 public class EventDto {
+    private final Long id;
+
     private final PersonDto author;
 
     private final String title;
@@ -42,6 +44,7 @@ public class EventDto {
 
     @JsonCreator
     public EventDto(
+        @JsonProperty("id") Long id,
         @JsonProperty("author") PersonDto author,
         @JsonProperty("title") String title,
         @JsonProperty("description") String description,
@@ -55,6 +58,7 @@ public class EventDto {
         @JsonProperty("likesCount") long likesCount,
         @JsonProperty("images") List<UploadedFile> images
     ) {
+        this.id = id;
         this.author = author;
         this.title = title;
         this.description = description;

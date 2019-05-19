@@ -9,6 +9,7 @@ public class EventConverter {
 
     public static EventDto toApi(Event event) {
         return new EventDto(
+            event.getId(),
             PersonConverter.toApi(event.getAuthor()),
             event.getTitle(),
             event.getDescription(),
