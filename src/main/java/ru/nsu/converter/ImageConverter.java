@@ -1,6 +1,6 @@
-package ru.nsu.controller.event.converter;
+package ru.nsu.converter;
 
-import ru.nsu.controller.event.dto.ImageDto;
+import ru.nsu.dto.ImageDto;
 import ru.nsu.entity.UploadedFile;
 
 public class ImageConverter {
